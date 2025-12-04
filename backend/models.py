@@ -24,12 +24,14 @@ class User:
         self.created_at = datetime.utcnow()
     
     def save(self):
-        user_dict = self.to_dict(include_password=True)
-        if '_id' in user_dict:
-            users_collection.update_one({'_id': self._id}, {'$set': user_dict})
-        else:
-            result = users_collection.insert_one(user_dict)
-            self._id = result.inserted_id
+        user_dict = {
+            '_id': self._id,
+            'username': self.username,
+            'password': self.password,
+            'created_at': self.created_at
+        }
+        result = users_collection.insert_one(user_dict)
+        self._id = result.inserted_id
         return self
     
     def to_dict(self, include_password=False):
@@ -76,12 +78,16 @@ class Post:
         self.updated_at = datetime.utcnow()
     
     def save(self):
-        post_dict = self.to_dict(include_id=True)
-        if '_id' in post_dict:
-            posts_collection.update_one({'_id': self._id}, {'$set': post_dict})
-        else:
-            result = posts_collection.insert_one(post_dict)
-            self._id = result.inserted_id
+        post_dict = {
+            '_id': self._id,
+            'title': self.title,
+            'content': self.content,
+            'author_id': self.user_id,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
+        result = posts_collection.insert_one(post_dict)
+        self._id = result.inserted_id
         return self
     
     def to_dict(self, include_id=False):
