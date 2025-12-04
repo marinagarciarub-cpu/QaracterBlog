@@ -1,4 +1,4 @@
-const API = 'http://localhost:3000';
+const API = 'http://localhost:5000/api';
 
 function escapeHtml(str){
   if(!str) return '';

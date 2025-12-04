@@ -50,7 +50,7 @@
     const container = document.getElementById('posts');
     const highlight = document.getElementById('highlight-post');
     try {
-      const res = await fetch('http://localhost:3000/posts');
+      const res = await fetch('http://localhost:5000/api/posts');
       const posts = await res.json();
 
       if (!posts || posts.length === 0) {
@@ -62,20 +62,20 @@
       // Primer post como destacado
       const first = posts[0];
       highlight.innerHTML = `
-        <a href="post.html?id=${first._id}" style="color:white;text-decoration:none;">
+        
           <h2>${first.title}</h2>
           <p class="meta">by ${first.author || 'Anonymous'} · ${new Date(first.date).toLocaleString()}</p>
           <p>${first.content.slice(0, 200)}...</p>
-        </a>
+      
       `;
 
       // Resto de posts en grid
       container.innerHTML = posts.slice(1).map(p => `
-        <a class="card" href="post.html?id=${p._id}">
+        
           <h2>${p.title}</h2>
           <p class="meta">by ${p.author || 'Anonymous'} · ${new Date(p.date).toLocaleString()}</p>
           <p class="excerpt">${p.content.slice(0,160)}...</p>
-        </a>
+   
       `).join('');
 
     } catch (err) {
