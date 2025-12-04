@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create - QaracterBlog</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html" class="back">← Back</a>
+    <h2>Create Post</h2>
+  </header>
+
+  <main class="container">
+    <form id="postForm" class="form">
+      <input name="title" placeholder="Title" required>
+      <input name="author" placeholder="Author" required>
+      <textarea name="content" rows="8" placeholder="Write your post..." required></textarea>
+      <div class="actions">
+        <button type="submit" class="btn">Publish</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="js/app.js"></script>
+  <script>
+    document.getElementById('postForm').addEventListener('submit', submitPost);
+  </script>
+</body>
+</html>
